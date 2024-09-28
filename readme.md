@@ -25,9 +25,10 @@
 
 <p align="center">
 
-  • [Introdução](#introdução-filtro-de-mediana) • [Descrição](#descrição) •  [Funcionalidades](#funcionalidades) • [Instalação](#instalação) • [Como Usar](#como-usar) • [Estrutura do Código](#estrutura-do-código) • [Exemplo de Uso](#exemplo-de-uso) • [Dependências](#dependências) • [Instalação das dependências](#instalação-das-dependências)
+  • [Introdução](#introdução-filtro-de-mediana) • [Descrição](#descrição) •  [Funcionalidades](#funcionalidades) • [Instalação](#instalação) • [Como Usar](#como-usar) • [Estrutura do Código](#estrutura-do-código) • [Exemplo de Uso](#exemplo-de-uso) • [Dependências](#dependências) • [Instalação das dependências](#instalação-das-dependências) • [Desafios](#desafios) • [Conclusões](#conclusões) • [Galeria de Imagens](#galeria-de-imagens-png) • [Sobre o Autor](#autor)
 
 </p>
+
 
 
 ## Introdução Filtro de Mediana
@@ -190,7 +191,7 @@ Este exemplo demonstra como usar o projeto para aplicar o filtro de mediana em i
     Após a execução, você verá algo assim:
 
     Imagem Original vs Imagem Filtrada: A imagem original pode conter ruídos (como ruído "sal e pimenta"), e após a aplicação do filtro de mediana, o ruído será reduzido, preservando os detalhes e bordas.
-    ![cameraman_filter_size_3](results/cameraman_filter_size_3.png)
+    ![Ballon Noise Reduce](results/balloons_noisy_filter_size_3.png)
 
 2. Exemplo com todas as imagem em um unico arquivo:
     ![all_images](results/all_3x3.png)
@@ -235,15 +236,23 @@ Você pode instalar todas as dependências de uma só vez usando o seguinte coma
 
    - **Solução**: A solução foi ajustar os loops para que percorrem a imagem garantindo que a janela de vizinhança fosse corretamente definida, especialmente para os pixels nas bordas da imagem. Além disso, utilizei funções nativas do NumPy para facilitar a manipulação dos arrays.
 
+   - ![Percorrer e modificar o array NumPy](logo/desafio1.png)
+
 2. **Carregar e manipular imagens PGM com arrays NumPy**:
    - **Desafio**: Carregar as imagens no formato PGM e convertê-las para arrays NumPy, de modo que pudessem ser manipuladas pelos filtros. Além disso, era necessário uma solução que permitisse lidar tanto com arquivos PGM como com imagens já carregadas como arrays NumPy, sem precisar criar funções separadas para cada caso.
 
    - **Solução**: Para resolver isso, criei uma única função que pudesse lidar tanto com arquivos de imagem PGM quanto com arrays NumPy diretamente. Isso facilitou o processamento das imagens, permitindo maior flexibilidade sem a necessidade de escrever funções diferentes para cada tipo de entrada. Usei a biblioteca Pillow (PIL) para carregar as imagens PGM e convertê-las para escala de cinza quando necessário, e tratei os arrays NumPy diretamente quando fornecidos como entrada.
 
+   - ![Carregar e manipular imagens PGM com arrays NumPy](logo/desafio2.png)
+
 3. **Trabalhar com o Matplotlib e alinhar gráficos**:
    - **Desafio**: Implementar tanto a visualização das imagens separadamente quanto a exibição de todas as imagens em um único arquivo de visualização. Quando as imagens eram exibidas lado a lado, houve desafios em garantir o alinhamento correto e a organização das imagens para comparação clara entre a imagem original e a imagem filtrada.
 
    - **Solução**: Para resolver isso, implementei duas funções diferentes. A primeira função lida com a exibição de uma única imagem original e sua versão filtrada, lado a lado, em dois subplots. A segunda função exibe todas as imagens originais e filtradas de uma só vez, organizando-as em uma grade. Para ambas, utilizei a função `plt.tight_layout()` para ajustar automaticamente os subplots e garantir que as imagens fossem exibidas de forma organizada e sem sobreposição.
+
+   - ![Função que plota Individualmene](logo/desafio3_1.png)
+   
+   - ![Função que plota Todos](logo/desafio3_2.png)
 
 
 # Conclusões 
@@ -258,6 +267,8 @@ Neste projeto, aplicamos o filtro de mediana em imagens PGM utilizando janelas d
    - **Remoção de ruído**: O filtro de tamanho 3x3 foi eficaz em reduzir o ruído do tipo "sal e pimenta" nas imagens. O ruído foi suavizado sem comprometer significativamente os detalhes da imagem, como os contornos do objeto central (o fotógrafo) e as áreas ao redor das bordas.
    - **Preservação de detalhes**: Com uma janela menor (3x3), o filtro conseguiu remover o ruído mantendo a maior parte dos detalhes importantes, como o rosto do fotógrafo e os contornos do tripé. Este filtro é útil quando a remoção de ruído é necessária, mas a preservação dos detalhes finos é uma prioridade.
 
+   **Sobre**: Oferece um equilíbrio entre remoção de ruído e preservação de detalhes. É indicado para situações em que o ruído não é extremo e os detalhes da imagem precisam ser mantidos.
+
 2. **Filtro de Mediana 9x9**
 
    ![Cameraman filter size 9](results/cameraman_filter_size_9.png)
@@ -266,15 +277,36 @@ Neste projeto, aplicamos o filtro de mediana em imagens PGM utilizando janelas d
 
    - **Perda de detalhes**: No entanto, o uso de um filtro maior também introduziu um borrão perceptível na imagem, afetando a nitidez dos detalhes. Áreas como o rosto do fotógrafo e o tripé perderam definição, e os contornos da imagem ficaram menos precisos. Isso ocorre porque uma janela maior considera mais vizinhos na mediana, resultando em uma suavização mais intensa.
 
+   **Sobre**: Ideal para casos em que o ruído é muito forte e a prioridade é a suavização máxima. No entanto, isso vem com o custo de uma perda maior de detalhes e nitidez nas áreas mais finas da imagem.
+
+
 ## Conclusão sobre os Filtros 3x3 e 9x9
 
-**Filtro 3x3**: Oferece um equilíbrio entre remoção de ruído e preservação de detalhes. É indicado para situações em que o ruído não é extremo e os detalhes da imagem precisam ser mantidos.
+- Esses resultados demonstram a **importância de escolher o tamanho adequado da janela do filtro de mediana** dependendo do tipo de imagem e do nível de ruído presente. Em imagens com muito ruído, o filtro de 9x9 pode ser mais eficaz, mas em imagens onde os detalhes são importantes, o filtro de 3x3 pode oferecer melhores resultados sem comprometer a qualidade visual.
+-  Exemplo de uma escolha inadequada de filtro para o contexto da imagem:
+   ![Rockwell-MBB X-31 - Filtro 9](results/x31_f18_filter_size_9.png)
 
-**Filtro 9x9**: Ideal para casos em que o ruído é muito forte e a prioridade é a suavização máxima. No entanto, isso vem com o custo de uma perda maior de detalhes e nitidez nas áreas mais finas da imagem.
+**Em imagens maiores (alta resolução)**: A quantidade de pixels por detalhe na imagem é maior, então quando você aplica um filtro com uma janela grande (como 9x9), o efeito de suavização se distribui em uma área relativamente menor em proporção ao tamanho total da imagem. Como resultado, o `borrão parece menor, porque os detalhes finos ainda estão presentes em grande quantidade em outras partes da imagem, e a suavização afeta apenas uma pequena parte em relação ao todo`.
+- Exemplo de uma escolha adequada de filtro que remove o ruído sem comprometer significativamente a imagem original.
+   - ![Einsten Filter 3](results/einstein_filter_size_3.png)
 
-- Esses resultados demonstram a importância de escolher o tamanho adequado da janela do filtro de mediana dependendo do tipo de imagem e do nível de ruído presente. Em imagens com muito ruído, o filtro de 9x9 pode ser mais eficaz, mas em imagens onde os detalhes são importantes, o filtro de 3x3 pode oferecer melhores resultados sem comprometer a qualidade visual.
+   
+**Em imagens menores (baixa resolução)**: Se você aplicar o mesmo filtro de janela 9x9 em uma imagem de menor resolução (por exemplo, 300x200 pixels), a janela do filtro cobrirá uma proporção muito maior da imagem. Isso significa que mais pixels serão influenciados, resultando em uma perda significativa de detalhes e uma aparência muito mais borrada. `Quanto menor a imagem, mais perceptível será o efeito do borrão`.
+- Exemplo de uma escolha inadequada de filtro que remove o ruído e compromete significativamente a imagem original.
+   - ![Kid Filter 9](results/kid_filter_size_9.png)
 
+## Galeria de Imagens PNG:
+[Acesse a pasta com as imagens dos resultados](./results/)
 
 # Filtro 3x3
 
+![Filtro 3x3](results/all_3x3.png)
+
 # Filtro 9x9
+
+![Filtro 9x9](results/all_9x9.png)
+
+
+## Autor
+
+*Este projeto foi desenvolvido por **Kelven Vilela Serejo**, aluno do **8º semestre de Engenharia da Computação** na **Fundação Santo André**, como parte da **Prova P1** da disciplina **Computação Gráfica** ministrada pelo professor **Bruno Monserrat Perrilho.***
