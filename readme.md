@@ -1,5 +1,28 @@
-# Título do Projeto
-"Filtro de Mediana para Imagens em PGM"
+<div align="center">
+<h1 style="font-weight: bold;">Filtro de Mediana para Imagens em PGM💻</h1>
+
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)
+
+</div>
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Pillow](https://img.shields.io/badge/Pillow-v10.0.4-green)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-v3.9.2-orange)
+![NumPy](https://img.shields.io/badge/NumPy-v2.1.1-lightgrey)
+
+</div>
+
+
+
+<p align="center">
+
+  [Instalação das dependências](#Instalação-das-dependências)
+
+</p>
+
 
 ## Introdução Filtro de Mediana
 
@@ -34,7 +57,7 @@ O projeto oferece as seguintes funcionalidades principais:
 Para executar este projeto, você precisará instalar algumas bibliotecas em Python. Siga os passos abaixo para configurar o ambiente:
 
 1. Clone o repositório do projeto:
-   ```bash
+   ```
    git clone <URL-do-repositório>
    ```
 2. Navegue até o diretório do projeto:
@@ -57,9 +80,9 @@ Após a instalação das dependências e configuração do ambiente, você pode 
 
 2. **Execute o script**:
    - Para aplicar o filtro de mediana e visualizar os resultados, basta executar o script principal:
-   ```bash
-   python medianFilter.py
-
+    ```
+    python medianFilter.py
+    ```
 
 ## Estrutura do Código
 
@@ -118,8 +141,9 @@ Este exemplo demonstra como usar o projeto para aplicar o filtro de mediana em i
 
 2. **Execute o script**:
    - Para processar as imagens com o filtro de mediana e exibir os resultados, execute o seguinte comando no terminal:
-   ```bash
+   ```
    python medianFilter.py
+   ```
 
 3. **Resultados**:
     - O programa aplicará o filtro de mediana a todas as imagens encontradas na pasta `pgm`.
@@ -153,33 +177,27 @@ Este projeto requer a instalação de algumas bibliotecas Python para funcionar 
 1. **Pillow (PIL)**:
    - Biblioteca para abrir, manipular e salvar diferentes formatos de imagem. É utilizada para carregar as imagens no formato PGM e convertê-las para escala de cinza.
    - Instalação:
-     ```bash
+     ```
      pip install pillow
      ```
 
 2. **Matplotlib**:
    - Utilizada para exibir as imagens e gráficos, facilitando a visualização comparativa das imagens originais e filtradas.
    - Instalação:
-     ```bash
+     ```
      pip install matplotlib
      ```
 
 3. **NumPy**:
    - Necessária para a manipulação de arrays, a NumPy permite que as imagens sejam representadas como matrizes e facilita o processamento dos pixels ao aplicar o filtro de mediana.
    - Instalação:
-     ```bash
+     ```
      pip install numpy
      ```
 
-### Instalação das dependências
+## Instalação das dependências
+Você pode instalar todas as dependências de uma só vez usando o seguinte comando:
 
-    Você pode instalar todas as dependências de uma só vez usando o seguinte comando:
-    ```bash
-    pip install pillow matplotlib numpy
-    ```
-
-## Contribuindo
-
-## Licença
-
-## Contato
+   ```
+   pip install pillow matplotlib numpy
+   ```
