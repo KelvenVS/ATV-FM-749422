@@ -1,3 +1,9 @@
+<p align="center">
+
+![FSA](logo/logo_fsa.png)
+
+</p>
+
 <div align="center">
 <h1 style="font-weight: bold;">Filtro de Mediana para Imagens em PGM💻</h1>
 
@@ -19,7 +25,7 @@
 
 <p align="center">
 
-  [Instalação das dependências](#Instalação-das-dependências)
+  [Introdução](#introdução-filtro-de-mediana) • [Descrição](#descrição) •  [Funcionalidades](#funcionalidades) • [Instalação](#instalação) • [Como Usar](#como-usar) • [Estrutura do Código](#estrutura-do-código) • [Exemplo de Uso](#exemplo-de-uso) • [Dependências](#dependências) • [Instalação das dependências](#instalação-das-dependências)
 
 </p>
 
