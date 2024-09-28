@@ -25,7 +25,7 @@
 
 <p align="center">
 
-  [Introdução](#introdução-filtro-de-mediana) • [Descrição](#descrição) •  [Funcionalidades](#funcionalidades) • [Instalação](#instalação) • [Como Usar](#como-usar) • [Estrutura do Código](#estrutura-do-código) • [Exemplo de Uso](#exemplo-de-uso) • [Dependências](#dependências) • [Instalação das dependências](#instalação-das-dependências)
+  • [Introdução](#introdução-filtro-de-mediana) • [Descrição](#descrição) •  [Funcionalidades](#funcionalidades) • [Instalação](#instalação) • [Como Usar](#como-usar) • [Estrutura do Código](#estrutura-do-código) • [Exemplo de Uso](#exemplo-de-uso) • [Dependências](#dependências) • [Instalação das dependências](#instalação-das-dependências)
 
 </p>
 
@@ -44,7 +44,27 @@ Este projeto implementa um filtro de mediana aplicado a imagens no formato PGM (
 
 ![Exemplo 1](results/cameraman_filter_size_3.png)
 
-## Funcionalidades
+## Funcionamento do Filtro de Mediana
+
+**Tecnica de mediana**: O filtro de mediana é uma técnica amplamente utilizada no processamento de imagens para remover ruídos, como o "ruído sal e pimenta". Ele funciona substituindo o valor de cada pixel da imagem pela mediana dos valores dos seus vizinhos dentro de uma janela de tamanho definido, tipicamente 3x3, 5x5, ou 9x9, sendo o tamanho 9x9 utilizado como padrão no código.
+
+<div align="center">
+
+   ![Professor: Bruno Monserrat Perillo - Fundação Santo André](logo/filtro_sample.png)
+
+</div>
+
+   - **Como funciona no programa**: A imagem é convertida para um array NumPy, que facilita o acesso aos valores dos pixels. Para cada pixel da imagem, uma janela de vizinhança é criada ao redor dele, com o tamanho especificado pelo parâmetro `filter_size`. Os valores de todos os pixels nessa janela são coletados, e a mediana desses valores é calculada e aplicada no pixel central.
+
+   - **Tratamento das bordas**: Quando a janela de vizinhança atinge as bordas da imagem, ela é ajustada automaticamente para considerar apenas os vizinhos dentro dos limites da imagem, evitando erros de acesso a pixels inexistentes.
+
+**Vantagens do filtro de mediana**:
+
+   - **Preservação de detalhes**: Ao contrário de filtros de média ou suavização, o filtro de mediana consegue remover ruídos sem desfocar bordas importantes da imagem.
+
+   - **Eficiência contra ruído sal e pimenta**: Ele é particularmente eficaz contra esse tipo de ruído, que altera os pixels para valores extremos (preto e branco).
+
+## Funcionalidades do Programa
 
 O projeto oferece as seguintes funcionalidades principais:
 
@@ -64,11 +84,11 @@ Para executar este projeto, você precisará instalar algumas bibliotecas em Pyt
 
 1. Clone o repositório do projeto:
    ```
-   git clone <URL-do-repositório>
+   git clone https://github.com/KelvenVS/ATV-FM-749422.git
    ```
 2. Navegue até o diretório do projeto:
     ```
-    cd nome-do-projeto
+    cd ATV-FM-749422
     ```
 3. Instale as dependências necessárias utilizando o pip:
     - Esses pacotes são utilizados para carregar, processar e exibir as imagens, além de manipular dados durante a execução do filtro de mediana.
@@ -173,7 +193,7 @@ Este exemplo demonstra como usar o projeto para aplicar o filtro de mediana em i
     ![cameraman_filter_size_3](results/cameraman_filter_size_3.png)
 
 2. Exemplo com todas as imagem em um unico arquivo:
-    ![all_images](results/all.png)
+    ![all_images](results/all_3x3.png)
 
 
 ## Dependências
@@ -207,3 +227,54 @@ Você pode instalar todas as dependências de uma só vez usando o seguinte coma
    ```
    pip install pillow matplotlib numpy
    ```
+
+# Desafios
+
+1. **Percorrer e modificar o array NumPy**:
+   - **Desafio**: A maior dificuldade foi criar a função que percorresse o array NumPy de forma eficiente, aplicando as modificações do filtro de mediana. Implementar corretamente a lógica de vizinhança e calcular a mediana dos pixels vizinhos foi desafiador, especialmente ao lidar com as bordas da imagem.
+
+   - **Solução**: A solução foi ajustar os loops para que percorrem a imagem garantindo que a janela de vizinhança fosse corretamente definida, especialmente para os pixels nas bordas da imagem. Além disso, utilizei funções nativas do NumPy para facilitar a manipulação dos arrays.
+
+2. **Carregar e manipular imagens PGM com arrays NumPy**:
+   - **Desafio**: Carregar as imagens no formato PGM e convertê-las para arrays NumPy, de modo que pudessem ser manipuladas pelos filtros. Além disso, era necessário uma solução que permitisse lidar tanto com arquivos PGM como com imagens já carregadas como arrays NumPy, sem precisar criar funções separadas para cada caso.
+
+   - **Solução**: Para resolver isso, criei uma única função que pudesse lidar tanto com arquivos de imagem PGM quanto com arrays NumPy diretamente. Isso facilitou o processamento das imagens, permitindo maior flexibilidade sem a necessidade de escrever funções diferentes para cada tipo de entrada. Usei a biblioteca Pillow (PIL) para carregar as imagens PGM e convertê-las para escala de cinza quando necessário, e tratei os arrays NumPy diretamente quando fornecidos como entrada.
+
+3. **Trabalhar com o Matplotlib e alinhar gráficos**:
+   - **Desafio**: Implementar tanto a visualização das imagens separadamente quanto a exibição de todas as imagens em um único arquivo de visualização. Quando as imagens eram exibidas lado a lado, houve desafios em garantir o alinhamento correto e a organização das imagens para comparação clara entre a imagem original e a imagem filtrada.
+
+   - **Solução**: Para resolver isso, implementei duas funções diferentes. A primeira função lida com a exibição de uma única imagem original e sua versão filtrada, lado a lado, em dois subplots. A segunda função exibe todas as imagens originais e filtradas de uma só vez, organizando-as em uma grade. Para ambas, utilizei a função `plt.tight_layout()` para ajustar automaticamente os subplots e garantir que as imagens fossem exibidas de forma organizada e sem sobreposição.
+
+
+# Conclusões 
+
+## Comparação dos Resultados com Filtros de Mediana 3x3 e 9x9
+Neste projeto, aplicamos o filtro de mediana em imagens PGM utilizando janelas de vizinhança de tamanhos diferentes. Abaixo estão os resultados obtidos com os filtros de 3x3 e 9x9, que ilustram o efeito de suavização do ruído e preservação de detalhes nas imagens processadas.
+
+1. **Filtro de Mediana 3x3**
+
+   ![Cameraman filter size 3](results/cameraman_filter_size_3.png)
+
+   - **Remoção de ruído**: O filtro de tamanho 3x3 foi eficaz em reduzir o ruído do tipo "sal e pimenta" nas imagens. O ruído foi suavizado sem comprometer significativamente os detalhes da imagem, como os contornos do objeto central (o fotógrafo) e as áreas ao redor das bordas.
+   - **Preservação de detalhes**: Com uma janela menor (3x3), o filtro conseguiu remover o ruído mantendo a maior parte dos detalhes importantes, como o rosto do fotógrafo e os contornos do tripé. Este filtro é útil quando a remoção de ruído é necessária, mas a preservação dos detalhes finos é uma prioridade.
+
+2. **Filtro de Mediana 9x9**
+
+   ![Cameraman filter size 9](results/cameraman_filter_size_9.png)
+
+   - **Redução de ruído mais agressiva**: Quando utilizamos uma janela maior, como 9x9, o filtro de mediana removeu praticamente todo o ruído da imagem, resultando em uma imagem muito mais limpa e suave.
+
+   - **Perda de detalhes**: No entanto, o uso de um filtro maior também introduziu um borrão perceptível na imagem, afetando a nitidez dos detalhes. Áreas como o rosto do fotógrafo e o tripé perderam definição, e os contornos da imagem ficaram menos precisos. Isso ocorre porque uma janela maior considera mais vizinhos na mediana, resultando em uma suavização mais intensa.
+
+## Conclusão sobre os Filtros 3x3 e 9x9
+
+**Filtro 3x3**: Oferece um equilíbrio entre remoção de ruído e preservação de detalhes. É indicado para situações em que o ruído não é extremo e os detalhes da imagem precisam ser mantidos.
+
+**Filtro 9x9**: Ideal para casos em que o ruído é muito forte e a prioridade é a suavização máxima. No entanto, isso vem com o custo de uma perda maior de detalhes e nitidez nas áreas mais finas da imagem.
+
+- Esses resultados demonstram a importância de escolher o tamanho adequado da janela do filtro de mediana dependendo do tipo de imagem e do nível de ruído presente. Em imagens com muito ruído, o filtro de 9x9 pode ser mais eficaz, mas em imagens onde os detalhes são importantes, o filtro de 3x3 pode oferecer melhores resultados sem comprometer a qualidade visual.
+
+
+# Filtro 3x3
+
+# Filtro 9x9
