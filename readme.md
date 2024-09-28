@@ -191,6 +191,7 @@ Este exemplo demonstra como usar o projeto para aplicar o filtro de mediana em i
     Após a execução, você verá algo assim:
 
     Imagem Original vs Imagem Filtrada: A imagem original pode conter ruídos (como ruído "sal e pimenta"), e após a aplicação do filtro de mediana, o ruído será reduzido, preservando os detalhes e bordas.
+    
     ![Ballon Noise Reduce](results/balloons_noisy_filter_size_3.png)
 
 2. Exemplo com todas as imagem em um unico arquivo:
